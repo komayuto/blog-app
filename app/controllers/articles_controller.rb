@@ -11,4 +11,19 @@ class ArticlesController < ApplicationController
     @article = Article.new
   end
 
+  def create
+    @article = Article.new(article_params)
+    if @article.save
+      redirect_to article_path(@article)
+    else
+      render :new
+    end
+  end
+
+  # データを保存する際に使う
+  private
+  def article_params
+    params.require(:article).permit(:title, :content)
+  end
+
 end
