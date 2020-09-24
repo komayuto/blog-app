@@ -21,6 +21,10 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def edit
+    @article = Article.find(params[:id])
+  end
+
   # データを保存する際に使う
   private
   def article_params
