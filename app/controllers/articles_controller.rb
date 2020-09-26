@@ -40,7 +40,6 @@ class ArticlesController < ApplicationController
       redirect_to root_path, notice: '削除しました'
     end
 
-
   # データを保存する際に使う
   private
   def article_params
@@ -49,6 +48,6 @@ class ArticlesController < ApplicationController
 
   def set_article
     @article = Article.find(params[:id])
-  end 
+  end
 
 end
