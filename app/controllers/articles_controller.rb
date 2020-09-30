@@ -47,7 +47,7 @@ class ArticlesController < ApplicationController
   # データを保存する際に使う
   private
   def article_params
-    params.require(:article).permit(:title, :content)
+    params.require(:article).permit(:title, :content, :eyecatch)
   end
 
   def set_article
