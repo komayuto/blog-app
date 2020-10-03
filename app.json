@@ -1,9 +1,9 @@
 {
   "name": "blog app",
-  "description": "This is blogapp",
+  "description": "This is blog-app",
   "keywords": [],
   "website": "",
-  "repository": "https://github.com/komayuto/blogapp",
+  "repository": "https://github.com/komayuto/blog-app",
   "env": {},
   "addons": [
     "heroku-postgresql:hobby-dev"
