@@ -13,5 +13,22 @@
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
-  }
+  },
+  "description": "This README would normally document whatever steps are necessary to get the application up and running.",
+  "main": "babel.config.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "git+https://github.com/komayuto/blog-app.git",
+  "keywords": [],
+  "author": "古俣祐斗 <komayuto1999@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/komayuto/blog-app/issues"
+  },
+  "homepage": "https://github.com/komayuto/blog-app#readme"
 }
