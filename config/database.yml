@@ -1,3 +1,5 @@
+# データベースサーバーの本番環境の立ち上げのためのファイル
+
 dedefault: &default
   adapter: postgresql
   encoding: unicode

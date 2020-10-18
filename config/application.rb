@@ -14,6 +14,7 @@ module BlogApp
     if Rails.env.development? || Rails.env.test?
       Bundler.require(*Rails.groups)
       Dotenv::Railtie.load
+      # 環境変数のためのもの
     end
 
     # Settings in config/environments/* take precedence over those specified here.
@@ -21,8 +22,8 @@ module BlogApp
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
-    # デフォルトの言語を日本語にする
     config.i18n.default_locale = :ja
+    # デフォルトの言語を日本語にする
 
   end
 end

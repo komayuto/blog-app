@@ -2,10 +2,18 @@
   %ul
     - @profile.errors.full_messages.each do |message|
       %li= message
+      -# 上の３文はprofile.rbで指定したルールとは違うことが起きた際にエラーのメッセージを表示してくれる。railsのルール。
     
   = form_with(model: @profile, url: profile_path, method: 'put', local: true) do |f|
+    -# form_withはフォームを作成する際に使う(投稿画面の作成などに使う)
+    -# form_withを使う際はmodel,url,methodを()の中で指定してあげる。
+    -# modelはどのformを更新しようとしていますか？と言う意味のため更新したいformをmodelに入れる
+    -# urlは送りたいurlを入れる
+    -# metodはpostなのかgetなのか入れる
+
     %div
       = f.label :avatar, 'アバター'
+      -# avatarは画像をストレージにアップロードするためのもの
     %div
       = f.file_field :avatar
     %div
@@ -20,6 +28,10 @@
       = f.label :gender, '性別'
     %div
       = f.select :gender, Profile.genders.map { |k, v| [ I18n.t("enum.genders.#{k}"), k ] }, {}, { class: 'text' }
+      -# selectの場合のclassは{}で囲わないと引数がおかしくなる。
+      -# selectの場合左がセレクトのオプションのラベルになり、左がバリューとなる。
+      -# mapでprofile.genderの中に配列の要素に処理をし別の配列を作る、|k, v| でキーとバリューの設定、I18n.tでymlフォルダーを表示、enumの中のgendersの中を、classはtextとするという意味。
+
     %div
       = f.label :birthday, '生年月日'
     %div

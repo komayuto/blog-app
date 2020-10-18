@@ -10,6 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+# schema.rbとは今現状のデータベースの状況をコピーしたもの(このファイルをいじっても何も影響はない)。メモ書きのようなもの
+
+
 ActiveRecord::Schema.define(version: 2020_09_29_120617) do
 
   # These are extensions that must be enabled in order to support this database

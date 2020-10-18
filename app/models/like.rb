@@ -15,5 +15,7 @@
 #
 class Like < ApplicationRecord
   belongs_to :user
+  # ユーザーと紐づける
   belongs_to :article
+  # 記事と紐づける
 end

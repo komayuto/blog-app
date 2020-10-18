@@ -14,5 +14,8 @@
 #
 class Comment < ApplicationRecord
   belongs_to :article
+  # belongs_to :articleでarticleにあるコメントを紐づけるといういみ。コメントとしては一つなので単数。
+
   validates :content, presence: true
+  # validatesでルールを決める。railsルール。contentが入っていないとダメ。
 end

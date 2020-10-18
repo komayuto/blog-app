@@ -2,6 +2,7 @@
   %ul
     - @comment.errors.full_messages.each do |message|
       %li= message
+      -# commnet.rbで指定したルールとは違うことが起きた際にエラーメッセージを表示する。railsのルール
 
   = form_with(model: @comment, url: article_comments_path(@comment.article), local: true) do |f|
     %div
@@ -9,3 +10,9 @@
     %div
       = f.text_area :content
     = f.submit '保存', class: 'btn-primary'
+
+-# form_withはフォームを作成する際に使う(投稿画面の作成などに使う)
+-# form_withを使う際はmodel,url,methodを()の中で指定してあげる。
+-# modelはどのformを更新しようとしていますか？と言う意味のため更新したいformをmodelに入れる
+-# urlは送りたいurlを入れる
+-# metodはpostなのかgetなのか入れる

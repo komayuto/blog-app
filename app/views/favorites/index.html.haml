@@ -2,4 +2,6 @@
   %h2
     お気に入りの記事
   - @articles.each do |article|
+    -# @articlesは記事、each doで繰り返し、articleで取得をする
     = render 'commons/article', article: article
+    -# renderで表示、commons/articleを表示する、取得するarticleはarticleの記事を表示

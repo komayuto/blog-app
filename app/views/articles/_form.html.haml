@@ -1,7 +1,10 @@
+-# 部分テンプレートノフォルダーは名前の最初に _ をつける
+
 .container
   %ul
     - article.errors.full_messages.each do |message|
       %li= message
+      -# 上の３文はarticle.rbのvalidatesなどで指定したルールとは違うことが起きた際にエラーのメッセージを表示してくれる。railsのルール。
   = form_with(model: article, local: true) do |f|
     %div
       = f.label :eyecatch, 'アイキャッチ'
@@ -16,3 +19,25 @@
     %div
       = f.text_area :content
     = f.submit '保存', class: 'btn-primary'
+
+
+-# form_withはフォームを作成する際に使う(投稿画面の作成などに使う)
+-# form_withを使う際はmodel,url,methodを()の中で指定してあげる。
+-# modelはどのformを更新しようとしていますか？と言う意味のため更新したいformをmodelに入れる
+-# urlは送りたいurlを入れる
+-# metodはpostなのかgetなのか入れる
+
+    %div
+      = f.label :eyecatch, 'アイキャッチ'
+      上の二文はrailsのルールでラベルを作成する際に使う
+
+    %div
+      = f.text_field :title
+      上の２文はhtmlで言うとinput typeのタグをrailsのルールで作成できる
+
+    %div
+      = f.text_area :content
+      上の２文はhtmlで言うとinput typeのタグをrailsのルールで作成できる
+
+     = f.submit '保存', class: 'btn-primary'
+     上の２文はhtmlで言うボタンの作成をrailsのルールで作っている
