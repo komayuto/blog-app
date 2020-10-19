@@ -45,7 +45,9 @@ gem 'hamlit'
 gem 'aws-sdk-s3', require: false
 # aws s3の設定のためのもの
 # Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
+
+gem 'image_processing', '~> 1.2'
+# 画像の編集などに使う。ターミナルにて brew install imagemagick を実行しておく
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
