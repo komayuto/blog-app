@@ -3,7 +3,6 @@
 # Table name: articles
 #
 #  id         :bigint           not null, primary key
-#  content    :text             not null
 #  title      :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -23,6 +22,9 @@ class Article < ApplicationRecord
   has_one_attached :eyecatch
   # 画像のアップロードのためのもの
 
+  has_rich_text :content
+  # contentに対して強化したエディターを渡すという意味
+
   validates :title, presence: true
   # titleがないと保存しない
 
@@ -31,11 +33,6 @@ class Article < ApplicationRecord
 
   validates :content, presence: true
   # contentがないと保存しない
-
-  validates :content, length: { minimum: 10 }
-  validates :content, uniqueness: true
-
-  validate :validate_title_and_content_length
 
   has_many :comments, dependent: :destroy
   # has_many commentsでArticleがたくさんのコメントを持っているという意味。記事から見てコメントは複数あるため複数形にする。
@@ -63,9 +60,5 @@ class Article < ApplicationRecord
   end
 
   # validateで独自のルールの内容についてprivateで書いている。この場合titleとcontentの内容が100文字以上ではなければいけないという意味。
-  private
-  def validate_title_and_content_length
-    char_count = self.title.length + self.content.length
-    errors.add(:coutent, '100文字以上で') unless char_count > 100
-  end
+
 end
