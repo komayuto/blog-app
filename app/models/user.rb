@@ -37,6 +37,16 @@ class User < ApplicationRecord
   # through: :likesでlikesテーブルを通してという意味
   # throughでlikesテーブルを通してarticleの記事のみ取得する。
 
+  has_many :following_relationships, foreign_key: 'follower_id', class_name: 'Relationship', dependent: :destroy
+  # 自分がフォローしている時のデータを持ってくる。
+  # foreign_key: で外部キーは 'follower_id'を指定しますよという意味。
+  # class_name: 'Relationship'でどのモデルのことを表現していうのか表している。
+
+  has_many :followings, through: :following_relationships, source: :following
+  # followingsはフォローしている人のことを表す
+  # through: :following_relationshipsで中間テーブルのrelationshipsテーブルを通してという意味。
+  # source: :followingでfollowingIDの取得
+
   has_one :profile, dependent: :destroy
   # has_oneは一つしかない場合に使う。profileもsはつけない。一つのプロフィールという意味。
   # dependent: :destroyでユーザーが消されたら投稿の記事なども消すという意味。
@@ -60,6 +70,11 @@ class User < ApplicationRecord
     profile&.nickname || self.email.split('@').first
     # display_nameはprofile&.nicknameがあればそれを入れる、なければself.email.split('@').firstを入れる
     # &.はぼっち演算子といいprofileがnillじゃなかったらnicknameを入れるという意味。
+  end
+
+  def follow!(user)
+    following_relationships.create!(following_id: user.id)
+    # following_relationshipsのモデルでcreate!作りますよ。(following_id は user.id で取得するという意味。
   end
 
   def prepare_profile
