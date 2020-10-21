@@ -30,6 +30,9 @@ gem 'annotate'
 # データベースの状況をmodleにメモ書きとして残してくれるもの。
 # bundle installをした後にターミナルにて rails g anotate:installをしなければならない。その後に rails db:migrateをする
 
+gem 'active_decorator'
+# active_decoratorファイルを使うための物
+
 gem 'better_errors'
 gem 'binding_of_caller'
 # 上の２文はエラー表示を分かりやすくするためのもの

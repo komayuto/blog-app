@@ -30,6 +30,8 @@ class Article < ApplicationRecord
 
   validates :title, length: { minimum: 2, maximum: 100 }
   validates :title, format: { with: /\A(?!\@)/ }
+  
+  # validateで独自のルールの内容についてprivateで書いている。この場合titleとcontentの内容が100文字以上ではなければいけないという意味。
 
   validates :content, presence: true
   # contentがないと保存しない
@@ -45,20 +47,5 @@ class Article < ApplicationRecord
   belongs_to :user
   # belongs_to :userで記事はユーザーと紐づいているという意味。
 
-  def display_created_at
-    I18n.l(self.created_at, format: :default)
-  end
-  # articleファイルの中で日付の表示を入れる際にdisplay_created_atと入れるだけで日付の表示ができるようにしている
-
-  def author_name
-    user.display_name
-  end
-
-  def like_count
-    likes.count
-    # いいねの数をカウントしてくれる
-  end
-
-  # validateで独自のルールの内容についてprivateで書いている。この場合titleとcontentの内容が100文字以上ではなければいけないという意味。
 
 end
