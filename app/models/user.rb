@@ -83,7 +83,13 @@ class User < ApplicationRecord
   end
 
   def follow!(user)
-    following_relationships.create!(following_id: user.id)
+    if user.is_a?(User)
+      # is_a?でインスタンス変数か確認している。user.is_a?(User)でuserIDがインスタンス変数だったら。
+      user_id = user.id
+    else
+      user_id = user
+    end
+    following_relationships.create!(following_id: user_id)
     # following_relationshipsのモデルでcreate!作りますよ。(following_id は user.id で取得するという意味。
   end
 
@@ -92,6 +98,12 @@ class User < ApplicationRecord
     # followingでフォローしているIDの取得
     relation.destroy!
     # そのIDを消す
+  end
+
+  def has_followed?(user)
+    following_relationships.exists?(following_id: user.id)
+    # フォローしているかしていないかチェックしている
+    # following_relationshipsで自分がフォローしている人の中に。exists?で いますか？。(following_id: user.id)フォローしているIDが
   end
 
   def prepare_profile

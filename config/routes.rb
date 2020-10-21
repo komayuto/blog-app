@@ -18,8 +18,11 @@ Rails.application.routes.draw do
     # createの理由はlikesテーブルにレコードを作りいいねをしているためcreateになる
   end
 
-  resources :accounts, only: [:show]
+  resources :accounts, only: [:show] do
   # 他のアカウントのプロフィールを見るためのもの
+    resources :follows, only: [:create]
+    # アカウントの中のフォローのURLの作成
+  end
 
   resource :profile, only: [:show, :edit, :update]
   # resource :profileでプロフィールのURLを作成。プロフィールはユーザーと紐付けられるのは一つなので単数。

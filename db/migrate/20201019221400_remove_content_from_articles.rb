@@ -7,7 +7,7 @@ class RemoveContentFromArticles < ActiveRecord::Migration[6.0]
   #   remove_column :articles, :content
   # end
   # upはmigrateを実行したときに反映されるもの
-  
+
   # def down
   #   add_column :articles, :content, :text
   # end

@@ -7,7 +7,7 @@
     .profilePage_user_basicInfo
       .profilePage_user_name
         .profilePage_user_displayName
-          #{user.display_name} (#{user.age || '?歳'}・#{I18n.t("enum.genders.#{user.gender || 'unknown'}")})
+          #{user.display_name}（#{user.age || '？歳'}・#{I18n.t("enum.genders.#{user.gender || 'unknown'}")}）
           -# @userで選択しているユーザーの、display_nameやageなどは他のフォルダーから持ってきている。
           -# １行に対して色々な文字を入れたい場合は#{}を使う
           -# I18n.tでymlフォルダーを表示という意味、enum.ja.ymlフォルダーのenumの中のgendersの中を表示、ログインされているプロフィールの性別。
@@ -17,8 +17,13 @@
             = link_to 'Edit', edit_profile_path
             -# Editで編集画面の表示
           - else
-            = link_to 'Follow', '#'
-            -# Followを表示してフォローできるようにする
+            - if current_user&.has_followed?(user)
+              -# &でnillだったら実装しない
+              -# ログインしているユーザーがuser.rbで指定した内容のhas_followed?(user)だったら
+              %p フォロー済み
+            - else
+              = link_to 'Follow', account_follows_path(user), data: {method: 'post'}
+              -# Followを表示してフォローできるようにする。フォローしたらaccount_follows_path(user)で選択されているユーザーをフォロー。データーはpost。
       .profilePage_user_introduction
         = user.profile&.introduction
 
