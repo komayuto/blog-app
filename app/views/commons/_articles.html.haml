@@ -1,0 +1,18 @@
+.container
+  = render 'commons/tabs'
+  -# renderでcommons/tabsの表示をしている。※部分テンプレートを使う場合はフォルダーの前に_を入れる。
+  - articles.each do |article|
+    = render 'commons/article', article: article
+    -# renderでcommons/articleのフォルダーを表示している。article: articleはcommons/articleの中のarticleを表示していますよという意味。※４行目のarticleに情報がないためarticle: articleで情報を入れている。
+  = link_to new_article_path do
+    .float_btn
+      %i.fa.fa-plus
+  -# link_toでhtmlで言うaタグのようなもの(この場合new_article_pathへリンクを飛ばすと言う意味)
+
+  -# link_to のあとの new_aritcle_pathでどこのリンクに飛ばすか指定している(どのリンクに飛ばせばいいかわからない場合は rails/info でリンク先を確認する)
+  
+  -# - @articles.each do |article| は articleのデータを繰り返し表示すると言う意味
+
+  -# .float_btn
+  -#     %i.fa.fa-plus 
+      上の２文を使うとfont-awesomeと言うツールを使っていてこの場合はプラスボタンの作成と言う意味になっている(アイコン作成に使う)。他のアイコンを使いたい場合は font-awesome調べたいアイコン名 で調べられる
