@@ -6,7 +6,10 @@
       -# アイキャッチ画像を表示
   %h1.artucle_title= @article.title
   .article_detail
-    = image_tag @article.user.avatar_image
+    = link_to account_path(@article.user) do
+      -# 他のアカウントのプロフィールにリンクを飛ばしている
+      = image_tag @article.user.avatar_image
+      -# imgの画像のアカウントの選択
     %div
       %p= @article.author_name
       -# article.rbでauthor_nameの内容を書いている

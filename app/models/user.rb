@@ -37,6 +37,26 @@ class User < ApplicationRecord
   # through: :likesでlikesテーブルを通してという意味
   # throughでlikesテーブルを通してarticleの記事のみ取得する。
 
+  has_many :following_relationships, foreign_key: 'follower_id', class_name: 'Relationship', dependent: :destroy
+  # 自分がフォローしている時のデータを持ってくる。
+  # foreign_key: で外部キーは 'follower_id'を指定しますよという意味。
+  # class_name: 'Relationship'でどのモデルのことを表現していうのか表している。
+
+  has_many :followings, through: :following_relationships, source: :following
+  # followingsはフォローしている人のことを表す
+  # through: :following_relationshipsで中間テーブルのrelationshipsテーブルを通してという意味。
+  # source: :followingでfollowingIDの取得
+
+  has_many :follower_relationships, foreign_key: 'following_id', class_name: 'Relationship', dependent: :destroy
+  # 自分がフォローされている時のデータを持ってくる。
+  # foreign_key: で外部キーは 'following_id'を指定しますよという意味。
+  # class_name: 'Relationship'でどのモデルのことを表現していうのか表している。
+
+  has_many :followers, through: :follower_relationships, source: :follower
+  # followersはフォローされている人のことを表す
+  # through: :follower_relationshipsで中間テーブルのrelationshipsテーブルを通してという意味。
+  # source: :followerでfollowerIDの取得
+
   has_one :profile, dependent: :destroy
   # has_oneは一つしかない場合に使う。profileもsはつけない。一つのプロフィールという意味。
   # dependent: :destroyでユーザーが消されたら投稿の記事なども消すという意味。
@@ -62,6 +82,28 @@ class User < ApplicationRecord
     # &.はぼっち演算子といいprofileがnillじゃなかったらnicknameを入れるという意味。
   end
 
+  def follow!(user)
+    user_id = get_user_id(user)
+    # get_user_id(user)はprivateの内容のこと
+    following_relationships.create!(following_id: user_id)
+    # following_relationshipsのモデルでcreate!作りますよ。(following_id は user.id で取得するという意味。
+  end
+
+  def unfollow!(user)
+    user_id = get_user_id(user)
+    # get_user_id(user)はprivateの内容のこと
+    relation = following_relationships.find_by!(following_id: user_id)
+    # followingでフォローしているIDの取得
+    relation.destroy!
+    # そのIDを消す
+  end
+
+  def has_followed?(user)
+    following_relationships.exists?(following_id: user.id)
+    # フォローしているかしていないかチェックしている
+    # following_relationshipsで自分がフォローしている人の中に。exists?で いますか？。(following_id: user.id)フォローしているIDが
+  end
+
   def prepare_profile
     profile || build_profile
     # profileがあったら左のprofileを表示ない場合は右の空のbuild_profileを表示。
@@ -77,4 +119,15 @@ class User < ApplicationRecord
       # 画像がアップロードされていない場合はデフォルトの画像を表示
     end
   end
+
+  private
+  def get_user_id(user)
+    if user.is_a?(User)
+      # is_a?でインスタンス変数か確認している。user.is_a?(User)でuserIDがインスタンス変数だったら。
+      user.id
+    else
+      user
+    end
+  end
+
 end
