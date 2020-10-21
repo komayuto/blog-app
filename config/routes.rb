@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   root to: 'articles#index'
   # root toで/を意味する。何もなけれはarticleのindexを表示すると言う意味
 
+  resource :timeline, only: [:show]
+  # タイムライン機能のURLの作成
+
   # resourcesとは色々なURLを作成する際に使う
   resources :articles do
     # resources :articles doでarticleのIDの下にURLを作る際に使う。例:id1の人の記事に何かコメントなどする場合id1のなかにURLを入れるというようなイメージ

@@ -76,12 +76,6 @@ class User < ApplicationRecord
     # likes.exists?でいいねしている情報はあるか確認、IDはarticleのID
   end
 
-  def display_name
-    profile&.nickname || self.email.split('@').first
-    # display_nameはprofile&.nicknameがあればそれを入れる、なければself.email.split('@').firstを入れる
-    # &.はぼっち演算子といいprofileがnillじゃなかったらnicknameを入れるという意味。
-  end
-
   def follow!(user)
     user_id = get_user_id(user)
     # get_user_id(user)はprivateの内容のこと
@@ -107,17 +101,6 @@ class User < ApplicationRecord
   def prepare_profile
     profile || build_profile
     # profileがあったら左のprofileを表示ない場合は右の空のbuild_profileを表示。
-  end
-
-  def avatar_image
-    if profile&.avatar&.attached?
-      # profileが入っていない場合エラーになるため &. のぼっち演算子を入れている、profileのavaterがアップロードされている場合。
-      profile.avatar
-      # profileのavaterを表示
-    else
-      'default-avatar.png'
-      # 画像がアップロードされていない場合はデフォルトの画像を表示
-    end
   end
 
   private

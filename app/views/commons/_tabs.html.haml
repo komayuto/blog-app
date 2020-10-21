@@ -1,0 +1,14 @@
+-# 部分テンプレートノフォルダーは名前の最初に _ をつける
+.tabs
+  .tabs_item{class: "#{add_active_class(root_path)}"}
+    -# add_active_classで指定したパスが今のページか調べる。もしこのページがroot_pathのページだったらクラス名をactiveとする。activeになった方がscssで指定した色になるためどちらの画面を開いているのかわかる。
+    = link_to '新規記事一覧', root_path
+    -# 新規記事一覧を押すとroot_pathを表示
+
+  .tabs_item{class: "#{add_active_class(timeline_path)}"}
+    -# add_active_classで指定したパスが今のページか調べる。もしこのページがtimeline_pathのページだったらクラス名をactiveとする。activeになった方がscssで指定した色になるためどちらの画面を開いているのかわかる。
+    = link_to 'タイムライン', timeline_path 
+    -# タイムラインを押すとtimeline_pathを表示
+
+    -# add_active_classは appの中のhelpersの中のtabs_helper.rbで内容を指定している。
+
