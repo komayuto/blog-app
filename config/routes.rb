@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   # 他のアカウントのプロフィールを見るためのもの
     resources :follows, only: [:create]
     # アカウントの中のフォローのURLの作成
+    resources :unfollows, only: [:create]
+    # アカウントの中のアカウントを消すためのURL
   end
 
   resource :profile, only: [:show, :edit, :update]

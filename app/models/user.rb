@@ -83,18 +83,16 @@ class User < ApplicationRecord
   end
 
   def follow!(user)
-    if user.is_a?(User)
-      # is_a?でインスタンス変数か確認している。user.is_a?(User)でuserIDがインスタンス変数だったら。
-      user_id = user.id
-    else
-      user_id = user
-    end
+    user_id = get_user_id(user)
+    # get_user_id(user)はprivateの内容のこと
     following_relationships.create!(following_id: user_id)
     # following_relationshipsのモデルでcreate!作りますよ。(following_id は user.id で取得するという意味。
   end
 
   def unfollow!(user)
-    relation = following_relationships.find_by!(following_id: user.id)
+    user_id = get_user_id(user)
+    # get_user_id(user)はprivateの内容のこと
+    relation = following_relationships.find_by!(following_id: user_id)
     # followingでフォローしているIDの取得
     relation.destroy!
     # そのIDを消す
@@ -121,4 +119,15 @@ class User < ApplicationRecord
       # 画像がアップロードされていない場合はデフォルトの画像を表示
     end
   end
+
+  private
+  def get_user_id(user)
+    if user.is_a?(User)
+      # is_a?でインスタンス変数か確認している。user.is_a?(User)でuserIDがインスタンス変数だったら。
+      user.id
+    else
+      user
+    end
+  end
+
 end
