@@ -18,3 +18,25 @@ require("channels")
 
 require("trix")
 require("@rails/actiontext")
+
+import $ from 'jquery'
+// import $ from 'jquery'はnode_modulesの中にあるjqueryから色々読み込む。jqueryを使うためのもの。読み込んだフィルをwebpackで解釈している。
+
+import  axios from 'axios'
+// axiosを使うためのコード
+
+document.addEventListener('turbolinks:load', () => {
+  $('.article_title').on('click', () => {
+    axios.get('/')
+    // axiosでrootの配下にgetリクエストを送る
+      .then((response) => {
+        // .thenで成功したら。responseを返す
+        console.log(response)
+        // console.logでresponseを確認する
+      })
+  })
+})
+// addEventListenerはイベントが発生したら関数の内容を行うという意味。
+// turbolinks:load'でリロードのような長い動作なく表示を変更できたりする。railsのルール。
+// DOMContentLoadedはページが表示されたら指定した内容を行うという意味。
+// $('.article_title').on('click'でarticle_titleがクリックされたらという意味。onはaddEventListenerと同じような意味合い。
