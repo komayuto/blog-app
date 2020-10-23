@@ -4,7 +4,6 @@
 // that code so it'll be compiled.
 
 require("@rails/ujs").start()
-require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 
@@ -19,32 +18,6 @@ require("channels")
 require("trix")
 require("@rails/actiontext")
 
-import $ from 'jquery'
-// import $ from 'jquery'はnode_modulesの中にあるjqueryから色々読み込む。jqueryを使うためのもの。読み込んだフィルをwebpackで解釈している。
 
-import axios from 'axios'
-// axiosを使うためのコード
 
-const handleHeartDisplay = (hasLiked) => {
-  if (hasLiked) {
-    $('.active-heart').removeClass('hidden')
-    // .active-heatのhiddenクラスを取り除く。removeClassでクラスを取り除く
-  } else {
-    $('.inactive-heart').removeClass('hidden')
-  }
-}
-
-document.addEventListener('turbolinks:load', () => {
-  const dataset = $('#article-show').data()
-  // datasetで記事のデータを取れるようにする
-  const articleId = dataset.articleId
-  axios.get(`/articles/${articleId}/like`)
-  // axiosを/articles/${articleId}/like'でgetで表示
-    .then((response) => {
-      // .thenはgetで表示できたら。responseを返す
-      const hasLiked = response.data.hasLiked
-      // hasLikedのデータを返す
-      handleHeartDisplay(hasLiked)
-    })
-})
 

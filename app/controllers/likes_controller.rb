@@ -16,8 +16,8 @@ class LikesController < ApplicationController
     # articleは空箱、articleのIDを取得している
     article.likes.create!(user_id: current_user.id)
     # 空のarticleにいいねを作る、!はできなかった場合エラーを出す、user_idはログインしているID
-    redirect_to article_path(article)
-    # できたらarticle_path(articleの記事)の場所に飛ばす
+    render json: { status: 'ok' }
+    # renderは描画する。jsonを使いstatusをokとする
   end
 
   def destroy
@@ -27,7 +27,7 @@ class LikesController < ApplicationController
     # articleのIDに、likes.find_byでいいねされているか確認、IDはログインしている自分のID
     like.destroy!
     # likeを消す
-    redirect_to article_path(article)
-    # できたらarticle_path(articleの記事の場所)に飛ばす
+    render json: { status: 'ok' }
+    # renderは描画する。jsonを使いstatusをokとする
   end
 end
