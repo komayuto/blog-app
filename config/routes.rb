@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     resources :comments, only: [:new, :create]
     # resources :commentsでarticleIDのなかにcommentsのURLを作成している。
 
-    resource :like, only: [:create, :destroy]
+    resource :like, only: [:show, :create, :destroy]
     # resource :likeでarticleIDのなかにlikeのURLを作っている。
     # createの理由はlikesテーブルにレコードを作りいいねをしているためcreateになる
   end

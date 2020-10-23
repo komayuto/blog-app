@@ -22,21 +22,29 @@ require("@rails/actiontext")
 import $ from 'jquery'
 // import $ from 'jquery'はnode_modulesの中にあるjqueryから色々読み込む。jqueryを使うためのもの。読み込んだフィルをwebpackで解釈している。
 
-import  axios from 'axios'
+import axios from 'axios'
 // axiosを使うためのコード
 
+const handleHeartDisplay = (hasLiked) => {
+  if (hasLiked) {
+    $('.active-heart').removeClass('hidden')
+    // .active-heatのhiddenクラスを取り除く。removeClassでクラスを取り除く
+  } else {
+    $('.inactive-heart').removeClass('hidden')
+  }
+}
+
 document.addEventListener('turbolinks:load', () => {
-  $('.article_title').on('click', () => {
-    axios.get('/')
-    // axiosでrootの配下にgetリクエストを送る
-      .then((response) => {
-        // .thenで成功したら。responseを返す
-        console.log(response)
-        // console.logでresponseを確認する
-      })
-  })
+  const dataset = $('#article-show').data()
+  // datasetで記事のデータを取れるようにする
+  const articleId = dataset.articleId
+  axios.get(`/articles/${articleId}/like`)
+  // axiosを/articles/${articleId}/like'でgetで表示
+    .then((response) => {
+      // .thenはgetで表示できたら。responseを返す
+      const hasLiked = response.data.hasLiked
+      // hasLikedのデータを返す
+      handleHeartDisplay(hasLiked)
+    })
 })
-// addEventListenerはイベントが発生したら関数の内容を行うという意味。
-// turbolinks:load'でリロードのような長い動作なく表示を変更できたりする。railsのルール。
-// DOMContentLoadedはページが表示されたら指定した内容を行うという意味。
-// $('.article_title').on('click'でarticle_titleがクリックされたらという意味。onはaddEventListenerと同じような意味合い。
+

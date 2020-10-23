@@ -2,6 +2,15 @@ class LikesController < ApplicationController
   before_action :authenticate_user!
   # before_actionでarticles_controller.rb内で同じようなコードがある場合に使う。authenticate_user!はrailsのルールで全てのアプリがログインしていなければ使えないという意味。
 
+  def show
+    article = Article.find(params[:article_id])
+    # articleは空箱、articleのIDを取得している
+    like_status = current_user.has_liked?(article)
+    # ログインしているユーザーがいいねをいているか記事に対してという意味
+    render json: { hasLiked: like_status }
+    # render描画する。jsonをhaslikedはlike_statusの内容を指定
+  end
+
   def create
     article = Article.find(params[:article_id])
     # articleは空箱、articleのIDを取得している
