@@ -15,8 +15,6 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @comments = @article.comments
-      # @commentsは空箱、@articleでset_articleの内容を継承している。commentsのIDを作る。
   end
 
   def new

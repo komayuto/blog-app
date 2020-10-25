@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   # resourcesとは色々なURLを作成する際に使う
   resources :articles do
     # resources :articles doでarticleのIDの下にURLを作る際に使う。例:id1の人の記事に何かコメントなどする場合id1のなかにURLを入れるというようなイメージ
-    resources :comments, only: [:new, :create]
+    resources :comments, only: [:index, :new, :create]
     # resources :commentsでarticleIDのなかにcommentsのURLを作成している。
 
     resource :like, only: [:show, :create, :destroy]

@@ -6,21 +6,24 @@ class CommentsController < ApplicationController
     # @commentは空の箱、article.comments.buildでarticleユーザーとcommentsが関連しているという意味。
   end
 
+  def index
+    article = Article.find(params[:article_id])
+    # articleは空の箱、articleIDの取得をしている。
+    comments = article.comments
+    # articleIDを取得しコメントを作成
+    render json: comments
+    # comment_serializer.rbの内容を使えるようにしている
+  end
+
   def create
     article = Article.find(params[:article_id])
     # articleは空の箱、articleIDの取得をしている。
     @comment = article.comments.build(comment_params)
     # @commentは空の箱、articleでarticleIDの,comments.buildでcommentsと関連している、(comment_params)commentのID。
-    if @comment.save
-      # commentが更新されたら
-      redirect_to article_path(article), notice: 'コメントを追加'
-      # redirect_toでリンクに飛ばす、article_path(article)のリンクに、noticeで登録できたらコメントを追加を表示
-    else
-      flash.now[:error] = '更新できませんでした'
-      # 更新されなかったら
-      render :new
-      # renderで表示、newを表示するという意味。
-    end
+    @comment.save!
+
+    render json: @comment
+    # comment_serializer.rbの内容を使えるようにしている
   end
 
     # privateはデータを保存する際に使う

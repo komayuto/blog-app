@@ -4,6 +4,8 @@
 // that code so it'll be compiled.
 
 require("@rails/ujs").start()
+// require("turbolinks").start()
+// turbolinksはリロードしなくても更新できるためのもの
 require("@rails/activestorage").start()
 require("channels")
 

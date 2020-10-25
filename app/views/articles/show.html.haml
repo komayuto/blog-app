@@ -41,17 +41,16 @@
 
 .article
   %h2 コメント一覧
-  - @comments.each do |comment|
-    -# コメント一覧を繰り返す
-    .article_comment
-      %p= comment.content
-      -# コメント一覧の表示。
+  .comments-container
 
 .container
-  = link_to new_article_comment_path(@article) do
-    .btn-secondary
+  .btn-secondary.show-comment-form
+    コメントを追加
+  .comment-text-area.hidden
+    = text_area_tag :comment_content, '', class: 'sm'
+    -# railsルールでtext_area_tegはテキストエリアのタグを作成するためもの。comment_contentは名前。''の中は初期値。class: 'sm'で短めのテキストエリア。
+    .btn-secondary.add-comment-button
       コメントを追加
-      -# link_toでリンクの作成、new_article_comment_pathはcommentsのURL、(@article)はarticleIDの指定。
 
 = javascript_pack_tag 'article'
 -# javascriptのpackの中のarticleを読み込める
