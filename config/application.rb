@@ -1,3 +1,5 @@
+# 起動時にアプリケーションの設定を行うためのファイル
+
 require_relative 'boot'
 
 require 'rails/all'
@@ -24,6 +26,9 @@ module BlogApp
 
     config.i18n.default_locale = :ja
     # デフォルトの言語を日本語にする
+
+    config.active_job.queue_adapter = :sidekiq
+    # sidekiqを使いますよというもの
 
   end
 end

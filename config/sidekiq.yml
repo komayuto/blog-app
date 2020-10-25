@@ -1,0 +1,7 @@
+# sidekiqを使うにあたって色々な設定をメモしておくところ
+:concurrency: 1
+# concurrencyは同時にさばける数
+:queues:
+# queuesは非同期処理をまとめるところ
+  - default
+  - mailers
