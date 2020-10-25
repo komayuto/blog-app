@@ -1,6 +1,12 @@
 # routes.rbはURLを作るところ
 
+require 'sidekiq/web'
+# sidekiqをweb上で読み込むためのもの
+
 Rails.application.routes.draw do
+
+  mount Sidekiq::Web => '/sidekiq' if Rails.env.development?
+  # sidekiqでqueuesがどれくらい溜まっているのかweb上で確認するためのもの
 
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
   # development環境であれば/letter_openerのURLでLetterOpenerWebの内容が見れるようになるというもの。(送信したメールの確認のためのもの)

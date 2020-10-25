@@ -53,6 +53,9 @@ gem 'aws-sdk-s3', require: false
 # aws s3の設定のためのもの
 # Use Active Storage variant
 
+gem 'sidekiq'
+# 非同期処理を簡単に行うためのアクティブジョブを使えるようにするためのもの
+
 gem 'image_processing', '~> 1.2'
 # 画像の編集などに使う。ターミナルにて brew install imagemagick を実行しておく
 
