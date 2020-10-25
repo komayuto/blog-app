@@ -33,6 +33,10 @@ gem 'annotate'
 gem 'active_decorator'
 # active_decoratorファイルを使うための物
 
+gem 'active_model_serializers'
+# アクティブレコードに関するインスタンスをjsonに変換してくれる。
+# rails g serializer 内容 をターミナルにて実行しファイルを作成する
+
 gem 'better_errors'
 gem 'binding_of_caller'
 # 上の２文はエラー表示を分かりやすくするためのもの

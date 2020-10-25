@@ -1,10 +1,10 @@
-.article
+.article#article-show{data: {article_id: @article.id}}
   - if @article.eyecatch.attached?
     -# articleの記事にアイキャッチ画像が設定されていたら
     .article_image
       = image_tag @article.eyecatch
       -# アイキャッチ画像を表示
-  %h1.artucle_title= @article.title
+  %h1.article_title= @article.title
   .article_detail
     = link_to account_path(@article.user) do
       -# 他のアカウントのプロフィールにリンクを飛ばしている
@@ -31,30 +31,26 @@
     = @article.content
   - if user_signed_in?
     -# もしサインインしていたら
-    - if current_user.has_liked?(@article)
-      -# もしログインしていて、@articleのきじにいいねをしていたら
-      .article_heart
-        = link_to article_like_path(@article), data: {method: 'delete' } do
-          -# link_toでリンクに飛ぶ、article_like_pathの@articleの記事に、data: {method: 'delete' } doでデータを削除したら
-          = image_tag 'heart-active.svg'
-          -# 記事をいいねを押したらheart-active.svgの表示
-    - else
-      .article_heart
-        = link_to article_like_path(@article), data: { method: 'post' } do
-          -# link_toでリンクに飛ぶ、article_like_pathの@articleの記事に、data: {method: 'post' } doでデータをpostをしたら
-          = image_tag 'heart.svg'
-          -# heart.svgの表示
+    .article_heart.hidden.active-heart
+      -# クラスのhiddenをscssで表示を消す用事してクリックされたら表示するようにする
+      = image_tag 'heart-active.svg'
+      -# heart-active.svgの表示
+    .article_heart.hidden.inactive-heart
+      = image_tag 'heart.svg'
+      -# heart.svgの表示
 
 .article
   %h2 コメント一覧
-  - @comments.each do |comment|
-    -# コメント一覧を繰り返す
-    .article_comment
-      %p= comment.content
-      -# コメント一覧の表示。
+  .comments-container
 
 .container
-  = link_to new_article_comment_path(@article) do
-    .btn-secondary
+  .btn-secondary.show-comment-form
+    コメントを追加
+  .comment-text-area.hidden
+    = text_area_tag :comment_content, '', class: 'sm'
+    -# railsルールでtext_area_tegはテキストエリアのタグを作成するためもの。comment_contentは名前。''の中は初期値。class: 'sm'で短めのテキストエリア。
+    .btn-secondary.add-comment-button
       コメントを追加
-      -# link_toでリンクの作成、new_article_comment_pathはcommentsのURL、(@article)はarticleIDの指定。
+
+= javascript_pack_tag 'article'
+-# javascriptのpackの中のarticleを読み込める
