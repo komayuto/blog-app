@@ -5,3 +5,8 @@
 
 = link_to 'プロフィールを確認する', account_url(@follower)
 -# プロフィールを確認するを押すとリングに飛ぶ。アカウントのURLは@followerでフォローしてきた人のURLに
+
+-# なぜaccount_pathではなくaccount_urlなのか
+-# users_path => '/users'
+-# users_url => 'http://localhost:3000/users'
+-# 他のツールの場合このようになるためuserIDのURLに行けなくなる
