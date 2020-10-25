@@ -85,6 +85,11 @@ group :development do
 
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+
+  gem 'letter_opener'
+  # メールを開くためのgem
+  gem 'letter_opener_web', '~> 1.0'
+  # web上でメールの送信履歴など見れるようにする
 end
 
 group :test do
