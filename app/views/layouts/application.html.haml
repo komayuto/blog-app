@@ -44,3 +44,7 @@
           %div{:class => "key"}= value
           -# 上の４文はarticle_controllerで保存ができた、保存できなかった際notice、Flashで文字の表示をしようとしたがそれを表示するための文
     = yield
+
+    = render 'layouts/footer'
+    -# renderで呼び込む。layoutsのfooter部分テンプレートを
+
