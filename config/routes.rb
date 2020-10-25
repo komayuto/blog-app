@@ -1,6 +1,10 @@
 # routes.rbはURLを作るところ
 
 Rails.application.routes.draw do
+
+  mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
+  # development環境であれば/letter_openerのURLでLetterOpenerWebの内容が見れるようになるというもの。(送信したメールの確認のためのもの)
+
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 

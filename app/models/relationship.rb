@@ -25,4 +25,13 @@ class Relationship < ApplicationRecord
   belongs_to :following, class_name: 'User'
   # following_IDと紐づいている。class_name: 'User'でクラス名の指定
 
+  after_create :send_email
+  # after_createでRelationshipが作成されたときsend_emailを実行。send_emailはprivateの内容
+
+  private
+  def send_email
+    RelationshipMailer.new_follower(following, follower).deliver_now
+    # 誰かがフォローされたときにsend_emailを実行する
+  end
+  
 end
