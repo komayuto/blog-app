@@ -30,8 +30,10 @@ class Relationship < ApplicationRecord
 
   private
   def send_email
-    RelationshipMailer.new_follower(following, follower).deliver_now
+    RelationshipMailer.new_follower(following, follower).deliver_later
     # 誰かがフォローされたときにsend_emailを実行する
+    # deliver_nowは今すぐ送りましょうをいう意味
+    # deliver_laterで非同期でメールを送信することができる
   end
   
 end
