@@ -75,6 +75,12 @@ group :development, :test do
   gem 'dotenv-rails'
   # 環境変数を扱うためのもの
 
+  gem 'rspec-rails'
+  # テスト環境を作るためのもの
+
+  gem 'factory_bot_rails'
+  # 効率よくダミーデータを作るためのもの
+
 end
 
 group :development do
