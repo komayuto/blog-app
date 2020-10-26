@@ -1,10 +1,4 @@
-class CommentsController < ApplicationController
-  def new
-    article = Article.find(params[:article_id])
-    # articleは空の箱、articleIDの取得をしている。
-    @comment = article.comments.build
-    # @commentは空の箱、article.comments.buildでarticleユーザーとcommentsが関連しているという意味。
-  end
+class Api::CommentsController < Api::ApplicationController
 
   def index
     article = Article.find(params[:article_id])

@@ -7,7 +7,7 @@ const listenInactiveHeartEvent = (articleId) => {
   // listenInactiveHeartEventのメソッドが実行されたら配下のコードが実装される
  $('.inactive-heart').on('click', () => {
     // onは.inactive-heartのクラスのイベントの監視をしている。クリックされたら
-    axios.post(`/articles/${articleId}/like`)
+    axios.post(`/api/articles/${articleId}/like`)
     // axiosを使う。postはlikeのいいねを示す。(`/articles/${articleId}/like`)のURLのこと。
       .then((response) => {
         // thenはpostで表示できたら。responseを返す
@@ -32,7 +32,7 @@ const listenInactiveHeartEvent = (articleId) => {
     // listenActiveHeartEventのメソッドが実装されたら下のコードが実行される
     $('.active-heart').on('click', () => {
       // onは.active-heartのクラスのイベントの監視をしている。クリックされたら
-      axios.delete(`/articles/${articleId}/like`)
+      axios.delete(`/api/articles/${articleId}/like`)
       // axiosを使う。deleteはlikeのいいねの削除。(`/articles/${articleId}/like`)のURLのこと。
         .then((response) => {
           // thenはpostで表示できたら。responseを返す
