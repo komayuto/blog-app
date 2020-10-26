@@ -17,19 +17,12 @@ Rails.application.routes.draw do
   root to: 'articles#index'
   # root toで/を意味する。何もなけれはarticleのindexを表示すると言う意味
 
-  resource :timeline, only: [:show]
-  # タイムライン機能のURLの作成
+  
 
   # resourcesとは色々なURLを作成する際に使う
-  resources :articles do
+  resources :articles 
     # resources :articles doでarticleのIDの下にURLを作る際に使う。例:id1の人の記事に何かコメントなどする場合id1のなかにURLを入れるというようなイメージ
-    resources :comments, only: [:index, :new, :create]
-    # resources :commentsでarticleIDのなかにcommentsのURLを作成している。
 
-    resource :like, only: [:show, :create, :destroy]
-    # resource :likeでarticleIDのなかにlikeのURLを作っている。
-    # createの理由はlikesテーブルにレコードを作りいいねをしているためcreateになる
-  end
 
   resources :accounts, only: [:show] do
   # 他のアカウントのプロフィールを見るためのもの
@@ -39,10 +32,31 @@ Rails.application.routes.draw do
     # アカウントの中のアカウントを消すためのURL
   end
 
-  resource :profile, only: [:show, :edit, :update]
-  # resource :profileでプロフィールのURLを作成。プロフィールはユーザーと紐付けられるのは一つなので単数。
+  scope module: :apps do
+    # scope moduleでコントローラーのみ変更。appsフォルダーについて
 
-  resources :favorites, only: [:index]
-  # resource :favoritesでプロフィールのURLを作成。favorites（いいねだけを表示する画面）は複数表示するためsをつける。
+    resources :favorites, only: [:index]
+    # resource :favoritesでプロフィールのURLを作成。favorites（いいねだけを表示する画面）は複数表示するためsをつける。
 
+    resource :timeline, only: [:show]
+    # タイムライン機能のURLの作成
+    
+    resource :profile, only: [:show, :edit, :update]
+    # resource :profileでプロフィールのURLを作成。プロフィールはユーザーと紐付けられるのは一つなので単数。
+  end
+
+  namespace :api, defaults: {format: :json} do
+    # namespaceURLもコントローラーも作成する。apiフォルダーについて変更。defaults{format: :json}でformat(htmlかjsonで表示するか)の指定できる
+
+    scope '/articles/:article_id' do
+      # scopeでURLのみ変更する。で先頭に/articles/:article_idを入れる
+
+      resources :comments, only: [:index, :create]
+      # resources :commentsでarticleIDのなかにcommentsのURLを作成している。
+  
+      resource :like, only: [:show, :create, :destroy]
+      # resource :likeでarticleIDのなかにlikeのURLを作っている。
+      # createの理由はlikesテーブルにレコードを作りいいねをしているためcreateになる
+    end
+  end
 end

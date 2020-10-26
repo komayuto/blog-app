@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // datasetで記事のデータを取れるようにする
   const articleId = dataset.articleId
 
-  axios.get(`/articles/${articleId}/comments`)
+  axios.get(`/api/articles/${articleId}/comments`)
   // axiosを/articles/${articleId}/comments'でgetで表示
     .then((response) => {
       // .thenはgetで表示できたら。responseを返す
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
       window.alert('コメントを入力してください')
       // window.alertでアラートの表示
     } else {
-      axios.post(`/articles/${articleId}/comments`, {
+      axios.post(`/api/articles/${articleId}/comments`, {
         // axiosをpostで表示/articles/${articleId}/commentsを
         comment: {content: content}
         // comments_controller.rbでコメントは comment: {content: 内容} このように表示するとしていたのでこのように入力をする
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })
 
-  axios.get(`/articles/${articleId}/like`)
+  axios.get(`/api/articles/${articleId}/like`)
   // axiosを/articles/${articleId}/like'でgetで表示
     .then((response) => {
       // .thenはgetで表示できたら。responseを返す
