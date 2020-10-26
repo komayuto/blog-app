@@ -64,6 +64,9 @@ RSpec.configure do |config|
 
   config.include FactoryBot::Syntax::Methods
   # factory_bot(ダミーデータを簡単に作る)を使うためのもの
+
+  config.include Devise::Test::IntegrationHelpers, type: :request
+  # リクエストスペックに対してDevise::Test::IntegrationHelpersをインストールしている。sgin_in userを使用するために入れた
 end
 
 
