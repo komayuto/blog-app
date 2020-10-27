@@ -6,6 +6,7 @@
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %title BlogApp
     = csrf_meta_tags
+    -# csrf_meta_tagsでcsrfToken(鍵)を取得してそれと一緒ではないとToken設定されている箇所はTokenがないと操作できないようにしている
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
