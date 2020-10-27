@@ -46,6 +46,7 @@ Rails.application.configure do
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
+  # Railsではsslの通信しか受け付けないようにできるオプション
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.

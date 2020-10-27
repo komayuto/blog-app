@@ -32,8 +32,8 @@ const handleCommentForm = () => {
 const appendNewComment = (comment) => {
   $('.comments-container').append(
     // appendはそのタグの中にHTMLを挿入するという意味。.comments-containerの中に。
-    `<div class="article_comment"><p>${comment.content}</p></div>`
-    // appendの挿入する内容
+    `<div class="article_comment"><p>${escape(comment.content)}</p></div>`
+    // appendの挿入する内容。escapeでコードのようなものを文字列にしてあげる(コメントのところで攻撃的なコードを入力されてもコードとして認識せずに文字列で表示するために重要なもの)。
   )
 }
 
