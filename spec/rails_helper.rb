@@ -67,6 +67,9 @@ RSpec.configure do |config|
 
   config.include Devise::Test::IntegrationHelpers, type: :request
   # リクエストスペックに対してDevise::Test::IntegrationHelpersをインストールしている。sgin_in userを使用するために入れた
+
+  config.include Devise::Test::IntegrationHelpers, type: :system
+  # システムスペックに対してDevise::Test::IntegrationHelpersをインストールしている。sgin_in userを使用するために入れた
 end
 
 

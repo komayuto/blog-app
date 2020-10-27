@@ -27,7 +27,7 @@
               -# link_toでは基本的にgetメソッドになってしまうためmethod: 'delete'でメソッドを指定してあげなければならない
               -# 上の文の@articleはidを指定しないといけないため必要となる
 
-  .artcle_content
+  .article_content
     = @article.content
   - if user_signed_in?
     -# もしサインインしていたら
